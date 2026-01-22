@@ -21,19 +21,19 @@ It uses **semantic similarity (Sentence Transformers + cosine similarity)** and 
 
 ## 🧱 Project Structure
 
-
-
+```text
 jobfit-ai-ats-scorer/
 │
-├── app/ # Backend app logic (scoring, API, services)
-├── frontend/ # Frontend UI
-├── utils/ # Helper functions (text cleaning, extraction, etc.)
+├── app/        # Backend app logic (scoring, API, services)
+├── frontend/   # Frontend UI
+├── utils/      # Helper functions (text cleaning, extraction, etc.)
 │
 ├── docker-compose.yml
 ├── Dockerfile
 ├── requirements.txt
 ├── .env.example
 └── README.md
+
 
 
 ---
