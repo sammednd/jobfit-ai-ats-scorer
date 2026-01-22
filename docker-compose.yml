@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  backend:
+    build: .
+    container_name: jobfit-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./jobfit.db
+      - EMBEDDING_MODEL_NAME=sentence-transformers/all-MiniLM-L6-v2
+      - TOP_K_KEYWORDS=10
+    volumes:
+      - ./jobfit.db:/app/jobfit.db
+
+  frontend:
+    image: python:3.11-slim
+    container_name: jobfit-frontend
+    working_dir: /frontend
+    volumes:
+      - ./frontend:/frontend
+    command: >
+      sh -c "pip install --no-cache-dir streamlit requests &&
+             streamlit run streamlit_app.py --server.port 8501 --server.address 0.0.0.0"
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://backend:8000
+    depends_on:
+      - backend
